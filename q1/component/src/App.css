@@ -1,0 +1,33 @@
+.dashboard {
+  padding: 1rem;
+}
+
+.readouts {
+  display: flex;
+  gap: 2rem;
+}
+
+.value.alert {
+  color: #e5484d;
+}
+
+.charts {
+  padding: 1rem;
+  --chart-series: #2a78d6;
+  --chart-grid: #e5e4e7;
+  --chart-axis: #6b6375;
+}
+
+@media (prefers-color-scheme: dark) {
+  .charts {
+    --chart-series: #3987e5;
+    --chart-grid: #2e303a;
+    --chart-axis: #9ca3af;
+  }
+}
+
+.chart h2 {
+  font-size: inherit;
+  font-weight: normal;
+  margin: 0 0 0.25rem;
+}
