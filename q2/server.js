@@ -1,6 +1,15 @@
+/*
+ * A small Express server that accepts batches of telemetry logs and summarises them.
+ * Logs are kept in a global array called 'data'. Uploads are validated as: every entry
+ * must be an object with a numeric timestamp, a numeric value and a component in the allowed
+ * list, and if any one entry fails the whole batch is rejected with 400. I assumed any 
+ * finite number is an acceptable timestamp and value, and that unknown extra 
+ * fields on an entry are rejected rather than stored. Errors return JSON with a message: 
+ * 400 for bad input or malformed JSON, 404 for unknown
+ * routes, and 500 from a final handler for anything unexpected.
+ */
+
 import express from 'express';
-
-
 
 const PORT = 8000;
 const components = ['battery', 'motor', 'gps'];
@@ -8,6 +17,8 @@ const data = [];
 
 const app = express();
 app.use(express.json());
+
+
 
 app.post('/logs/upload', (req, res) => {
   const body = req.body;
